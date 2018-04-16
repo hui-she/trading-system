@@ -1,3 +1,4 @@
+import Home from './views/layout/Home.vue'
 let routes = [{
   path: '/login',
   component: function (resolve) {
@@ -30,9 +31,7 @@ let routes = [{
   name: '',
   children: [{
       path: '/Home',
-      component: function (resolve) {
-          require(['./views/layout/Home.vue'], resolve)
-      },
+      component: Home,
       name: '首页'
   }],
   redirect: {

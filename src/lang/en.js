@@ -1,5 +1,5 @@
 export default {
-  route: {
+  route: { 
     logo: "BIHUO",
     tradingCenter: "Exchange",
     funds: "Funds",
@@ -15,6 +15,7 @@ export default {
     support: "Support",
     news: "News",
     account: "Account",
+    accountManagement: "Account",
     assessment: "Estimated Value",
     login: "Login",
     logout: "Logout",

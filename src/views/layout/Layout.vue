@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
       <v-head></v-head>
-      <!-- <v-sidebar></v-sidebar> -->
       
       <div class="content">
           <router-view></router-view>
@@ -18,7 +17,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
+  .content{
+    padding-top: 62px;
+  }
 
 </style>
 

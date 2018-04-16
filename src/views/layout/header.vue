@@ -1,21 +1,19 @@
 <template>
-  <el-col :span="24" class="header">
-      <div class="logo">
-        <span>{{$t('route.logo')}}</span>
-      </div>
+  <el-col :span="24" type="flex" class="header">
       <el-menu
         :default-active="$route.path"
         router
-        class="el-menu-demo"
+        class="homeNav"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#545c64"
-        text-color="#fff"
-        active-text-color="#ffd04b">
-        <el-menu-item index="/tradingCenter">{{$t('route.tradingCenter')}}</el-menu-item>
+        text-color="#333333"
+        active-text-color="#F5A623">
+          <el-menu-item index="/Home">{{$t('route.logo')}}</el-menu-item>
+          <el-menu-item index="/tradingCenter">{{$t('route.tradingCenter')}}</el-menu-item>
+          <el-menu-item index="" class="blank" disabled></el-menu-item>
         <el-submenu index="/fundsManagement">
             <template slot="title">{{$t('route.funds')}}</template>
-            <el-menu-item index="2-1">{{$t('route.balances')}}</el-menu-item>
+            <el-menu-item index="">{{$t('route.balances')}}</el-menu-item>
             <el-menu-item index="2-2">{{$t('route.deposits')}}</el-menu-item>
             <el-menu-item index="2-3">{{$t('route.withdrawals')}}</el-menu-item>
             <el-menu-item index="2-2">{{$t('route.transactionHistory')}}</el-menu-item>
@@ -26,20 +24,34 @@
             <el-menu-item index="2-2">{{$t('route.orderHistory')}}</el-menu-item>
             <el-menu-item index="2-3">{{$t('route.tradeHistory')}}</el-menu-item>
         </el-submenu>
-        <el-menu-item index="">{{$t('route.join')}}</el-menu-item>
+        <el-submenu index="/account">
+            <template slot="title">{{$t('route.account')}}</template>
+            <el-menu-item index="2-1">{{$t('route.accountManagement')}}</el-menu-item>
+            <el-menu-item index="2-2">{{$t('route.assessment')}}</el-menu-item>
+            <el-menu-item index="2-3">{{$t('route.logout')}}</el-menu-item>
+        </el-submenu>
+        <!-- <el-menu-item index="">{{$t('route.join')}}</el-menu-item>
         <el-menu-item index="/helpCenter">{{$t('route.support')}}</el-menu-item>
-        <el-menu-item index="">{{$t('route.news')}}</el-menu-item>
-        <el-dropdown class="changeLang" @command="handleSetLanguage">
-            <span class="el-dropdown-link">
-                {{$t('route.lang')}}
-            </span>
-            <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item command="zh" :disabled="language==='zh'">简体中文</el-dropdown-item>
-                <el-dropdown-item command="en" :disabled="language==='en'">English</el-dropdown-item>
-            </el-dropdown-menu>
-        </el-dropdown>
+        <el-menu-item index="">{{$t('route.news')}}</el-menu-item> -->
+        <!-- <el-menu-item index="">
+            <el-dropdown class="changeLang" @command="handleSetLanguage">
+                <span class="el-dropdown-link">
+                    {{$t('route.lang')}}
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="zh" :disabled="language==='zh'">简体中文</el-dropdown-item>
+                    <el-dropdown-item command="en" :disabled="language==='en'">English</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </el-menu-item> -->
+        <el-submenu index="changeLang">
+            <template slot="title">{{$t('route.lang')}}</template>
+            <el-menu-item index="" :disabled="language==='zh'" @click="handleSetLanguage('zh')">简体中文</el-menu-item>
+            <el-menu-item index="" :disabled="language==='en'" @click="handleSetLanguage('en')">English</el-menu-item>
+        </el-submenu>
         </el-menu>
-      <div class="userinfo">
+        </el-col>
+      <!-- <div class="userinfo">
         <el-dropdown trigger="hover" placement="bottom-start">
           <div>
             <i class="iconfont orgName icon-duoren"></i>
@@ -53,12 +65,10 @@
           <i class="iconfont icon-icwindowzoom48px"></i>
           全屏
         </span>
-      </div>
-    </el-col>
+      </div> -->
 </template>
 
 <script>
-import screenfull from "screenfull";
 export default {
   data() {
     return {
@@ -71,16 +81,9 @@ export default {
     },
     handleSelect(key, keyPath) {
         console.log(key, keyPath);
-    },
-    fullScreen() {
-      if (!screenfull.enabled) {
-        this.$message({
-          message: "you browser can not work",
-          type: "warning"
-        });
-        return false;
-      }
-      screenfull.toggle();
+        if(!key){
+          
+        }
     },
     //退出登录
     logout: function() {
@@ -113,12 +116,26 @@ export default {
 
 <style scoped lang="scss">
 @import "~scss_vars";
+.homeNav{
+  display: flex;
+  // .el-menu-item{
+  //   float: left;
+  // }
+  .blank{
+    flex: 1;
+    cursor:auto;
+  }
+}
+.el-menu--horizontal{
+  .el-menu-item{
+    &:hover{
+      background: #EEEEEE;
+    }
+  }
+}
 .changeLang{
-    height: 60px;
-    
     .el-dropdown-link{
-        color: #ffffff;
-        line-height: 60px;
+        
     }
     
 }
