@@ -117,6 +117,7 @@ export default {
 <style scoped lang="scss">
 @import "~scss_vars";
 .homeNav{
+  min-width: 1200px;
   display: flex;
   // .el-menu-item{
   //   float: left;

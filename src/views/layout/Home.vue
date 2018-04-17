@@ -19,12 +19,60 @@
   </el-row>
 
   <el-row class="tabMain">
-    <el-col :span="24">
-      <el-tabs class="" :class="{'tabClass':hasBorder}" v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="自选" name="myself">自选</el-tab-pane>
-        <el-tab-pane label="BTC市场" name="BTC">BTC市场</el-tab-pane>
-        <el-tab-pane label="ETH市场" name="ETH">ETH市场</el-tab-pane>
+    <el-col class="tabBox" :span="24">
+      <el-tabs class="" type="card" :class="{'tabClass':hasBorder}" v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane>
+          <span slot="label"><i class="el-icon-star-on"></i> 自选</span>
+          <el-row class="tabTitle">
+            <el-col :span="4"><div class="title">市场</div></el-col>
+            <el-col :span="4"><div class="title">最新价</div></el-col>
+            <el-col :span="4"><div class="title">24h涨跌幅</div></el-col>
+            <el-col :span="4"><div class="title">24h最高价</div></el-col>
+            <el-col :span="4"><div class="title">24h最低价</div></el-col>
+            <el-col :span="4"><div class="title">24h成交量</div></el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="BTC市场" name="BTC">
+          <el-row class="tabTitle">
+            <el-col :span="4"><div class="title">市场</div></el-col>
+            <el-col :span="4"><div class="title">最新价</div></el-col>
+            <el-col :span="4"><div class="title">24h涨跌幅</div></el-col>
+            <el-col :span="4"><div class="title">24h最高价</div></el-col>
+            <el-col :span="4"><div class="title">24h最低价</div></el-col>
+            <el-col :span="4"><div class="title">24h成交量</div></el-col>
+          </el-row>
+          <ul class="tabContent">
+            <li v-for="(item,idx) in BTCList" :key="idx">
+              <router-link :to="'/tradingCenter/'+item.id">
+                <el-row class="goodsItem">
+                  <el-col :span="4"><div class="good"><i :class="item.star=='off'?'el-icon-star-off':'el-icon-star-on'"></i>{{item.name}}</div></el-col>
+                  <el-col :span="4"><div class="goods">{{item.newPrice1}}</div></el-col>
+                  <el-col :span="4"><div class="goods">{{item.scope}}</div></el-col>
+                  <el-col :span="4"><div class="goods">{{item.high}}</div></el-col>
+                  <el-col :span="4"><div class="goods">{{item.down}}</div></el-col>
+                  <el-col :span="4"><div class="goods">{{item.all}}</div></el-col>
+                </el-row>
+              </router-link>
+            </li>
+          </ul>
+        </el-tab-pane>
+        <el-tab-pane label="ETH市场" name="ETH">
+          <el-row class="tabTitle">
+            <el-col :span="4"><div class="title">市场</div></el-col>
+            <el-col :span="4"><div class="title">最新价</div></el-col>
+            <el-col :span="4"><div class="title">24h涨跌幅</div></el-col>
+            <el-col :span="4"><div class="title">24h最高价</div></el-col>
+            <el-col :span="4"><div class="title">24h最低价</div></el-col>
+            <el-col :span="4"><div class="title">24h成交量</div></el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
+      <el-input
+        class="search"
+        placeholder="请输入内容"
+        prefix-icon="el-icon-search"
+        >
+      </el-input>
     </el-col>
   </el-row>
 
@@ -70,6 +118,11 @@ export default {
       return {
         activeName: 'BTC',
         hasBorder:true,
+        BTCList: [
+          {id:"1",name:"XVG/BTC",newPrice1:"0.00001257",newPrice2:"0.67",scope:"17.48%",high:"0.00001310",down:"0.00000975",all:"17,245.43037969",star:"off"},
+          {id:"2",name:"ADA/BTC",newPrice1:"0.00001257",newPrice2:"1.67",scope:"-17.48%",high:"0.00001310",down:"0.00000975",all:"17,245.43037969",star:"on"}
+        ],
+
       };
     },
     methods: {
@@ -82,6 +135,9 @@ export default {
 
 <style lang="scss">
 .home{
+  height: 100%;
+  min-width: 1200px;
+  color: #333333;
   .banner{
     height: 400px;
     background: #000;
@@ -108,6 +164,62 @@ export default {
         }
       }
     }
+  }
+  .tabMain{
+    padding: 60px;
+    padding-bottom: 120px;
+    .tabBox{
+      position: relative;
+      .search{
+        height: 34px;
+        width: 200px;
+        position: absolute;
+        top: 2px;
+        left: 300px;
+        input{
+          border-radius: 0;
+          height: 34px;
+        }
+        span{
+          height: 34px;
+          i{
+            line-height: 34px;
+          }
+        }
+      }
+      .f-left{
+        text-align: left;
+      }
+      .f-right{
+        text-align: right;
+      }
+      .tabTitle{
+        font-size: 12px;
+        color: #666666;
+        text-align: center;
+        line-height: 30px;
+        .title{
+          cursor:pointer;
+        }
+      }
+      .tabContent{
+        
+      }
+
+      .el-tabs__nav{
+        border-radius: 0;
+      }
+      .el-tabs--card > .el-tabs__header{
+        border: 0;
+      }
+      .el-tabs__header{
+        margin: 0;
+      }
+      .el-tabs__content{
+        border: 1px solid #CCCCCC;
+      }
+    }
+    
   }
 
   .footer{

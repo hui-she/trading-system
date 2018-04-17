@@ -44,7 +44,7 @@ let routes = [{
       require(['./views/layout/Layout.vue'], resolve)
   },
   children: [{
-      path: '/tradingCenter',
+      path: '/tradingCenter/:goodsId',
       component: function (resolve) {
           require(['./views/tradingCenter/tradingCenter.vue'], resolve)
       },

@@ -18,10 +18,14 @@ export default {
 </script>
 
 <style lang='scss'>
+.wrapper{
+  min-height: 100%;
+  min-width: 100%;
   .content{
     padding-top: 62px;
+    min-height: 100%;
   }
-
+}
 </style>
 
 
